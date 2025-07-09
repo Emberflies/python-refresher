@@ -3,23 +3,27 @@ import bank
 
 
 class TestBank(unittest.TestCase):
-    def setUp(self):
-        self.account = bank.bank("George", 1000)
-
     def test_deposit(self):
-        self.assertTrue(self.account.deposit(500))
-        self.assertEqual(self.account.get_balance(), 1500)
-        self.assertFalse(self.account.deposit(-100))
-        self.assertEqual(self.account.get_balance(), 1500)
+        account1 = bank.bank("George", 1000)
+        self.assertTrue(account1.deposit(500))
+        self.assertEqual(account1.get_balance(), 1500)
+        self.assertFalse(account1.deposit(-100))
+        self.assertFalse(account1.deposit("a"))
+        self.assertEqual(account1.get_balance(), 1500)
 
     def test_withdraw(self):
-        self.assertTrue(self.account.withdraw(200))
-        self.assertEqual(self.account.get_balance(), 800)
-        self.assertFalse(self.account.withdraw(900))
-        self.assertFalse(self.account.withdraw(-100))
+        account2 = bank.bank("George", 1000)
+        self.assertTrue(account2.withdraw(200))
+        self.assertEqual(account2.get_balance(), 800)
+        self.assertFalse(account2.withdraw(900))
+        self.assertFalse(account2.withdraw(-100))
+        self.assertFalse(account2.withdraw("b"))
+        self.assertEqual(account2.get_balance(), 800)
 
     def test_get_balance(self):
-        self.assertEqual(self.account.get_balance(), 1000)
+        account3 = bank.bank("George", 1000)
+        self.assertEqual(account3.get_balance(), 1000)
 
     def test_get_name(self):
-        self.assertEqual(self.account.get_name(), "George")
+        account4 = bank.bank("George", 1000)
+        self.assertEqual(account4.get_name(), "George")
